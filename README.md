@@ -26,7 +26,7 @@ Run `yarn` on root folder to install dependencies related to Express.
 ```bash
   DB_HOST=localhost
   DB_USER=root
-  DB_NAME=km0-project
+  DB_NAME=km0_project
   DB_PASS=YOURPASSWORD
 ```
 
