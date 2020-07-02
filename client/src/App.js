@@ -1,14 +1,20 @@
 import React from "react";
 import "./App.css";
+import Home from "./home.jsx";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-class App extends React.Component {
-	render() {
-		return (
-			<div className="App">
-				<h1>Km0 Project</h1>
-			</div>
-		);
-	}
+function App() {
+  return (
+    <div className="App">
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <Home></Home>
+          </Route>
+        </Switch>
+      </Router>
+    </div>
+  );
 }
 
 export default App;
