@@ -1,0 +1,66 @@
+.container {
+  padding: 5%;
+  background-color: #96bb7c;
+}
+
+.header-container {
+  padding: 5%;
+  background-color: green;
+}
+
+.header-title {
+  display: flex;
+}
+
+.left-header {
+  width: 75%;
+}
+
+#img-header {
+  width: 200px;
+}
+
+img {
+  width: 100px;
+}
+
+.searcher-container {
+  padding: 5%;
+  background-color: blue;
+  display: flex;
+}
+
+.left-title-container {
+  padding: 5%;
+  background-color: lawngreen;
+  width: 60%;
+}
+
+.right-title-container {
+  padding: 5%;
+  background-color: lightseagreen;
+}
+.title-container {
+  padding: 5%;
+  background-color: green;
+}
+
+.form-container {
+  padding: 5%;
+  background-color: hotpink;
+}
+
+.image-container {
+  padding: 5%;
+  background-color: pink;
+}
+
+.body {
+  padding: 5%;
+  background-color: purple;
+}
+
+.section-one {
+  padding: 5%;
+  background-color: grey;
+}
