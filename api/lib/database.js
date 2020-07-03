@@ -39,7 +39,7 @@ con.connect(function (err) {
 	});
 
 	let createRestaurantsQuery =
-		"DROP TABLE if exists restaurants; CREATE TABLE restaurants (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, address VARCHAR(255) NOT NULL, telephone VARCHAR(255) NOT NULL, longitude FLOAT NOT NULL, latitude FLOAT NOT NULL, userId INT NOT NULL, price INT NOT NULL, style VARCHAR(255), FOREIGN KEY (userId) REFERENCES users (id), PRIMARY KEY (id));";
+		"DROP TABLE if exists restaurants; CREATE TABLE restaurants (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, address VARCHAR(255) NOT NULL, telephone VARCHAR(255) NOT NULL, longitude FLOAT NOT NULL, latitude FLOAT NOT NULL, userId INT, price INT NOT NULL, style VARCHAR(255), FOREIGN KEY (userId) REFERENCES users (id), PRIMARY KEY (id));";
 	con.query(createRestaurantsQuery, function (err, result) {
 		if (err) throw err;
 		console.log("Table creation `restaurants` was successful!");
