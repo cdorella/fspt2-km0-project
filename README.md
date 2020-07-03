@@ -30,8 +30,7 @@ Run `yarn` on root folder to install dependencies related to Express.
   DB_PASS=YOURPASSWORD
 ```
 
-<!-- PENDING DATABASE SET UP -->
-<!-- - Run `yarn migrate` in the main folder of this repository, in a new terminal window. This will create the database and the tables you need for this project in your database. -->
+- Run `yarn migrate` in the main folder of this repository, in a new terminal window. This will create the database and the tables you need for this project in your database.
 
 ### Run Your Development Servers
 
