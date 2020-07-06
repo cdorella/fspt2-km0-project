@@ -27,7 +27,7 @@ Run `yarn` on root folder to install dependencies related to Express.
   DB_HOST=localhost
   DB_USER=root
   DB_NAME=km0_project
-  DB_PASS=
+  DB_PASS=YOURPASSWORD
 ```
 
 - Run `yarn migrate` in the main folder of this repository, in a new terminal window. This will create the database and the tables you need for this project in your database.
