@@ -1,0 +1,97 @@
+.restaurant-container {
+  background-color: white;
+  background-color: #96bb7c;
+}
+
+.restaurant-details {
+}
+
+.restaurant-img-container {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(16, 43, 38);
+}
+
+.img-restaurant {
+  width: 100%;
+  border-radius: 10%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.spacer {
+  height: 40px;
+}
+
+.restaurant-name {
+  display: flex;
+  justify-content: center;
+}
+
+.restaurant-general {
+  display: flex;
+  justify-content: center;
+}
+
+.restaurant-info {
+  padding-left: 18%;
+
+  width: 30%;
+
+  padding-bottom: 4%;
+}
+
+.restaurant-banner-container {
+  display: flex;
+  align-items: center;
+}
+
+.restaurant-banner {
+  width: 60%;
+}
+
+.special-container {
+  display: flex;
+  justify-content: center;
+}
+
+.special {
+  background-color: #eebb4d;
+  border-style: solid;
+  width: 75%;
+  border-radius: 15%;
+  justify-content: center;
+  text-align: center;
+  border-color: transparent;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.info-title {
+  font-size: 30px;
+  background-color: white;
+  width: 35%;
+  border-radius: 50%;
+  justify-content: center;
+  padding-left: 5%;
+}
+
+.button-special {
+  background-color: white;
+  border-radius: 20%;
+  height: 35px;
+  width: 200px;
+}
+
+.restaurant-name-title {
+  color: #184d47;
+  font-size: 45px;
+}
+
+.google-maps {
+  padding: 5%;
+  background-color: fuchsia;
+}
+
+.button-restaurant {
+  background-color: white;
+  height: 20px;
+}

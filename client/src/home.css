@@ -4,8 +4,6 @@
 }
 
 .header-container {
-  padding: 5%;
-  background-color: green;
 }
 
 .header-title {
@@ -14,53 +12,229 @@
 
 .left-header {
   width: 75%;
+  display: flex;
+  flex-direction: column;
+}
+
+#subtitle {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.right-header {
+  display: flex;
+  justify-content: right;
 }
 
 #img-header {
+  width: 400px;
+}
+
+#logo-home {
   width: 200px;
 }
 
-img {
-  width: 100px;
+.img-body {
+  max-width: 85%;
+}
+
+.little-header {
+  padding: 5%;
+  text-align: center;
+}
+
+.intro-container {
+  display: flex;
+  justify-content: center;
+}
+
+.intro-title {
+  color: white;
+  font-size: 3.5em;
 }
 
 .searcher-container {
-  padding: 5%;
-  background-color: blue;
   display: flex;
+  align-items: center;
+  width: 80%;
+  padding: 15%;
+  background-attachment: red;
+  justify-content: center;
+  border: black;
 }
 
-.left-title-container {
-  padding: 5%;
-  background-color: lawngreen;
-  width: 60%;
+.space-home {
+  background-color: #bf593a;
+  height: 15px;
 }
 
-.right-title-container {
-  padding: 5%;
-  background-color: lightseagreen;
-}
-.title-container {
-  padding: 5%;
-  background-color: green;
+.space-home2 {
+  background-color: #eebb4d;
+  height: 20px;
 }
 
 .form-container {
-  padding: 5%;
-  background-color: hotpink;
+  justify-content: center;
+  background-color: #96bb7c;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.image-container {
-  padding: 5%;
-  background-color: pink;
+.spacer2 {
+  height: 40px;
+}
+
+.left-title-container {
+  width: 100%;
+}
+
+.form-home {
+  background-color: white;
+  width: 65%;
+  margin: 0.3em auto 0 auto;
+  font-size: 3em;
+  line-height: 1.5;
+  padding: 2%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.right-title-container {
+}
+.title-container {
+}
+
+.section-one-content {
+  display: flex;
+}
+
+.section-one-content1 {
+  justify-content: center;
+}
+
+.little-contenet {
+  padding: 4%;
+}
+
+ul {
+  list-style: none;
+  margin: 15px;
+  padding: 0;
+}
+
+input,
+select,
+button {
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+input:focus {
+  outline: none;
 }
 
 .body {
-  padding: 5%;
-  background-color: purple;
+}
+
+.little-img {
+  padding: 2%;
 }
 
 .section-one {
-  padding: 5%;
-  background-color: grey;
+  background-color: #d6efc7;
+}
+
+.button-form {
+  background-color: white;
+  height: 50px;
+  width: 300px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.spacer1 {
+  height: 100px;
+}
+
+.section-one-title {
+  text-align: center;
+  background-color: #bf593a;
+  border-top-right-radius: 50%;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 25%;
+  border-bottom-right-radius: 25%;
+
+  text-align: center;
+}
+
+.little-header {
+  padding: 2%;
+}
+
+.nl-field {
+  display: inline-block;
+  position: relative;
+}
+
+.nl-field.nl-field-open {
+  z-index: 10000;
+}
+
+.nl-field-toggle,
+.nl-form input,
+.nl-form select {
+  line-height: inherit;
+  display: inline-block;
+  color: #b14943;
+  cursor: pointer;
+  border-bottom: 1px dashed #b14943;
+}
+.nl-field ul {
+  position: absolute;
+  visibility: hidden;
+  background: #76c3bd;
+  left: -0.5em;
+  top: 50%;
+  font-size: 80%;
+  opacity: 0;
+  transform: translateY(-40%) scale(0.9);
+  transition: visibility 0s 0.3s, opacity 0.3s, transform 0.3s;
+}
+
+.nl-field.nl-field-open ul {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+  transition: visibility 0s 0s, opacity 0.3s, transform 0.3s;
+}
+
+.nl-field ul li {
+  color: #fff;
+  position: relative;
+}
+
+.nl-dd ul li {
+  padding: 0 1.5em 0 0.5em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.nl-dd ul li.nl-dd-checked {
+  color: #478982;
+}
+
+.no-touch .nl-dd ul li:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.no-touch .nl-dd ul li:hover:active {
+  color: #478982;
 }
