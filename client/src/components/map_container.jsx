@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -8,7 +8,7 @@ const mapStyles = {
   height: "400px",
 };
 
-export class MapContainer extends Component {
+class MapContainer extends React.Component {
   constructor(props) {
     super(props);
 
