@@ -2,6 +2,33 @@ import React from "react";
 import "./home.css";
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cuisines: [],
+      price: "",
+    };
+  }
+
+  componentDidMount() {
+    this.getCuisines();
+  }
+
+  getCuisines = () => {
+    fetch(`api/cuisines`)
+      .then((response) => response.json())
+      .then((response) => {
+        this.setState({ cuisines: response });
+      });
+  };
+
+  handleChange = (event) => {
+    const { value, name } = event.target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
   render() {
     return (
       <div className="container">
@@ -23,34 +50,27 @@ class Home extends React.Component {
           <div className="form-container">
             <form className="form-home">
               <div class="nl-field nl-dd">
-                <a class="nl-field-toggle">any food</a>
-                <ul>
-                  <li class="nl-dd-checked">any food</li>
-                  <li>Indian</li>
-                  <li>French</li>
-                  <li>Japanese</li>
-                  <li>Italian</li>
-                </ul>
+                <label>
+                  Hey! I feel like eating some km.0 and concious food. Looking
+                  for
+                </label>
+
+                <select>
+                  <option> any style </option>
+                  {this.state.cuisines.map((cuisine) => (
+                    <option Id={cuisine.id} key={cuisine.id}>
+                      {cuisine.cuisine_name}
+                    </option>
+                  ))}
+                </select>
+                <label> and I want it to be</label>
+                <select>
+                  <option> any price</option>
+                  <option> cheap </option>
+                  <option> regular price </option>
+                  <option> something fancy </option>
+                </select>
               </div>
-              <label>I feel like eating something fresh</label>
-              <br></br>
-              <label>and concious. I like </label>
-              <select>
-                <option> Italian </option>
-                <option> Sushi </option>
-                <option> Greek </option>
-                <option> Spanish </option>
-              </select>
-              <label> style </label>
-              <br></br>
-              <label> and I want to spend around </label>
-              <select>
-                <option> € </option>
-                <option> €€ </option>
-                <option> €€€ </option>
-                <option> €€€€ </option>
-              </select>
-              <br></br>
             </form>
             <div className="spacer2"></div>
             <button className="button-form"> Find a place!</button>
