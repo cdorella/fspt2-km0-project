@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
 
@@ -8,116 +8,68 @@ const mapStyles = {
   height: "400px",
 };
 
-const center = {
-  lat: 41.3851,
-  lng: 2.1734,
-};
-
-let service = null;
-
 export class MapContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      input: "",
-      suggestions: [],
-      places: [],
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
     };
   }
 
-  savePlace = (place) => {
-    this.setState({ places: [...this.state.places, place] });
-  };
-
-  handleChange = (e) => {
-    this.setState({ input: e.target.value });
-  };
-
-  handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      this.search();
-    }
-  };
-
-  // might not be needed
-  onMarkerClick = (props, marker, e) => {
-    console.log(props, marker, e);
-  };
-
-  // might not be useful for us as it is used for searching
-  initPlaces(mapProps, map) {
-    const { google } = mapProps;
-    service = new google.maps.places.PlacesService(map);
-  }
-
-  search = () => {
-    const { input } = this.state;
-    service.textSearch({ query: input }, (suggestions) => {
-      this.setState({
-        suggestions,
-      });
+  onMarkerClick = (props, marker, e) =>
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true,
     });
+
+  onClose = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null,
+      });
+    }
   };
 
   render() {
-    const { suggestions, places } = this.state;
-
-    // might not be needed
-    var bounds = new this.props.google.maps.LatLngBounds();
-    for (var i = 0; i < places.length; i++) {
-      bounds.extend(places[i].geometry.location);
-    }
-
+    const { name, address, longitude, latitude } = this.props;
     return (
-      <div className="container">
-        <div>
+      <Map
+        google={this.props.google}
+        zoom={12}
+        style={mapStyles}
+        initialCenter={{
+          lat: 41.3851,
+          lng: 2.1734,
+        }}
+        center={{
+          lat: latitude,
+          lng: longitude,
+        }}
+      >
+        <Marker
+          onClick={this.onMarkerClick}
+          position={{
+            lat: latitude,
+            lng: longitude,
+          }}
+        />
+
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+          onClose={this.onClose}
+        >
           <div>
-            <div>
-              <input
-                type="text"
-                value={this.state.input}
-                onChange={this.handleChange}
-                onKeyPress={this.handleKeyPress}
-              />
-              <button onClick={this.search}>Search</button>
-            </div>
-            <h3>Suggestions</h3>
-            <ul>
-              {suggestions.map((place, i) => (
-                <li key={i}>
-                  <div>
-                    <div>
-                      <strong>{place.name}</strong>
-                    </div>
-                    <span>{place.formatted_address}</span>
-                  </div>
-                  <button onClick={() => this.savePlace(place)}>Show</button>
-                </li>
-              ))}
-            </ul>
+            <h4>{name}</h4>
+            <h4>{address}</h4>
           </div>
-          <div>
-            <Map
-              google={this.props.google}
-              onReady={this.initPlaces} // might not be useful for us
-              zoom={14}
-              style={mapStyles}
-              bounds={bounds} // might not be needed
-              initialCenter={center}
-            >
-              {places.map((place, index) => (
-                <Marker
-                  onClick={this.onMarkerClick} // might not be needed
-                  name={place.name}
-                  position={place.geometry.location}
-                  key={index}
-                />
-              ))}
-            </Map>
-          </div>
-        </div>
-      </div>
+        </InfoWindow>
+      </Map>
     );
   }
 }
