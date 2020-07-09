@@ -16,14 +16,14 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
+          <Route path="/login" exact>
+            <Login></Login>
+          </Route>
           <Route path="/" exact>
             <Home></Home>
           </Route>
           <Route path="/restaurant" exact>
             <Restaurant></Restaurant>
-          </Route>
-          <Route path="/login" exact>
-            <Login></Login>
           </Route>
         </Switch>
       </Router>
