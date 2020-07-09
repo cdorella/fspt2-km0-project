@@ -16,7 +16,7 @@ routes.get("/", (req, res) => {
 
 // GET ALL CUISINES
 routes.get("/cuisines", (req, res) => {
-  db("SELECT * FROM cuisines;")
+  db("SELECT * FROM cuisines ORDER BY cuisine_name ASC;")
     .then((results) => {
       if (results.error) {
         res.status(400).send({ message: "There was an error" });
@@ -101,7 +101,7 @@ routes.get("/restaurants/:id", async (req, res) => {
 // POST LOGIN (PENDING CONFIRMATION JWT AUTHENTICATION)
 routes.post("/login", (req, res) => {
   //check if there is someone with this username and password
-  
+
   const { username, password } = req.body;
   db(
     `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`

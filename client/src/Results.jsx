@@ -1,63 +1,78 @@
 import React from "react";
+import { withRouter, Link } from "react-router-dom";
 import "./Results.css";
 
 class Results extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      restaurants: [],
-    };
+    this.state = {};
   }
-
-  componentDidMount() {
-    this.getRestaurants();
-  }
-
-  getRestaurants = () => {
-    fetch(`/api/search`)
-      .then((response) => response.json())
-      .then((response) => {
-        this.setState({ restaurants: response });
-      });
-  };
 
   render() {
-    const { name, address, cuisine_name, price, style } = this.state;
+    const { restaurants } = this.props.history.location.state;
+
     return (
       <div className="general-container">
         <div className="title-container">
           {" "}
-          <h1 id="header"> here is your best choice</h1>
+          <h1 id="header"> here are your best choices</h1>
         </div>
         <div className="results-container">
           <div className="restaurants-container">
-            {this.state.restaurants.map((restaurant) => (
-              <div className="restaurant">
-                <div id="restaurant-name-container" key={restaurant.id}>
-                  <h1>{restaurant.name}</h1>
-                </div>
-                <div className="restaurant-up">
-                  <div className="restaurant-img">
-                    <img
-                      className="restaurant-icon"
-                      src="https://image.flaticon.com/icons/svg/2909/2909782.svg"
-                    ></img>
+            {restaurants.length ? (
+              restaurants.map((restaurant) => (
+                <div className="restaurant" key={restaurant.id}>
+                  <div id="restaurant-name-container">
+                    <h1>{restaurant.name}</h1>
                   </div>
-                  <div className="restaurant-info">
-                    <label> Adress: {restaurant.address} </label>
-                    <br></br>
+                  <div className="restaurant-up">
+                    <div className="restaurant-img">
+                      <img
+                        className="restaurant-icon"
+                        src="https://image.flaticon.com/icons/svg/2909/2909782.svg"
+                      ></img>
+                    </div>
+                    <div className="restaurant-info">
+                      <label>
+                        {" "}
+                        <strong>Address:</strong> {restaurant.address}{" "}
+                      </label>
+                      <br></br>
 
-                    <label> Cuisine: {restaurant.cuisine_name}</label>
-                    <br></br>
-                    <label> Price: {restaurant.price} </label>
-                    <br></br>
-                    <br></br>
-                    <button className="button-restaurant">click me</button>
+                      <label>
+                        {" "}
+                        <strong>Cuisine: </strong>
+                        {restaurant.cuisine_name}
+                      </label>
+                      <br></br>
+                      <label>
+                        {" "}
+                        <strong>Style:</strong> {restaurant.style}{" "}
+                      </label>
+                      <br></br>
+                      <br></br>
+                      <Link
+                        className="button-restaurant"
+                        to={`/restaurant/${restaurant.id}`}
+                      >
+                        Click me
+                      </Link>
+                    </div>
                   </div>
                 </div>
+              ))
+            ) : (
+              <div>
+                {" "}
+                <h1 id="header">
+                  {" "}
+                  Sorry, no results matched your criteria.
+                </h1>{" "}
+                <Link className="button-restaurant" to="/">
+                  <button>Back to search</button>
+                </Link>
               </div>
-            ))}
+            )}
           </div>
           <div className="img-container">
             <img
@@ -71,4 +86,4 @@ class Results extends React.Component {
   }
 }
 
-export default Results;
+export default withRouter(Results);
