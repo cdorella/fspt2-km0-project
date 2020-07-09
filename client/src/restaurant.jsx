@@ -13,11 +13,13 @@ class Restaurant extends React.Component {
     };
   }
 
-  // ID TO COME FROM SELECTION ON HOME PAGE
-  // getRestaurantById = (restaurantId) => () => {
-  getRestaurantById = () => {
-    // fetch(`/api/restaurants/${restaurantId}`)
-    fetch(`/api/restaurants/1`) // FOR NOW JUST FOR TESTING USING ID #1
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.getRestaurantById(id);
+  }
+
+  getRestaurantById = (restaurantId) => {
+    fetch(`/api/restaurants/${restaurantId}`)
       .then((response) => response.json())
       .then((response) => {
         this.setState({
@@ -51,11 +53,6 @@ class Restaurant extends React.Component {
               className="restaurant-banner"
             ></img>
           </div>
-
-          {/* THIS BUTTON WAS ADDED JUST SO THAT I HAVE DATA TO WORK WITH **CAROLINA*/}
-          <button className="button-special" onClick={this.getRestaurantById}>
-            Click here to test
-          </button>
 
           <div className="restaurant-name">
             {" "}
