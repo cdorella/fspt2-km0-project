@@ -1,8 +1,47 @@
 import React from "react";
 import "./restaurant.css";
+import MapContainer from "./components/map_container";
+import QRCodeGenerator from "./components/qr_code_generator";
+import { Link } from "react-router-dom";
 
 class Restaurant extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedRestaurant: {},
+      specials: [],
+    };
+  }
+
+  // ID TO COME FROM SELECTION ON HOME PAGE
+  // getRestaurantById = (restaurantId) => () => {
+  getRestaurantById = () => {
+    // fetch(`/api/restaurants/${restaurantId}`)
+    fetch(`/api/restaurants/1`) // FOR NOW JUST FOR TESTING USING ID #1
+      .then((response) => response.json())
+      .then((response) => {
+        this.setState({
+          selectedRestaurant: response,
+          specials: response.specials,
+        });
+      })
+      .catch(() => {
+        this.setState({ error: true });
+      });
+  };
+
   render() {
+    const { selectedRestaurant, specials } = this.state;
+
+    let price = "";
+    if (selectedRestaurant.price === 1) {
+      price = "Cheap Eats";
+    } else if (selectedRestaurant.price === 2) {
+      price = "Mid-range";
+    } else if (selectedRestaurant.price === 3) {
+      price = "Fine Dining";
+    }
+
     return (
       <div className="restaurant-container">
         <div className="restaurant-details">
@@ -12,19 +51,25 @@ class Restaurant extends React.Component {
               className="restaurant-banner"
             ></img>
           </div>
+
+          {/* THIS BUTTON WAS ADDED JUST SO THAT I HAVE DATA TO WORK WITH **CAROLINA*/}
+          <button className="button-special" onClick={this.getRestaurantById}>
+            Click here to test
+          </button>
+
           <div className="restaurant-name">
             {" "}
-            <h1 className="restaurant-name-title">restaurant-name</h1>
+            <h1 className="restaurant-name-title">{selectedRestaurant.name}</h1>
           </div>
           <div className="restaurant-general">
             <div className="restaurant-info">
-              <h2 className="info-title"> Adress: </h2>{" "}
-              <p> restaurant adress here</p>
+              <h2 className="info-title"> Address: </h2>{" "}
+              <p>{selectedRestaurant.address}</p>
               <h2 className="info-title"> Telephone: </h2>{" "}
-              <p> restaurant phone here</p>
-              <h2 className="info-title"> Price: </h2>{" "}
-              <p> restaurant price here</p>
-              <h2 className="info-title"> Style: </h2> <p> map style here</p>
+              <p>{selectedRestaurant.telephone}</p>
+              <h2 className="info-title"> Price: </h2> <p>{price}</p>
+              <h2 className="info-title"> Style: </h2>
+              <p>{selectedRestaurant.style}</p>
             </div>
             <div className="restaurant-banner-container">
               <img
@@ -37,15 +82,33 @@ class Restaurant extends React.Component {
           <div className="special-container">
             <div className="special">
               <h2>We have a special for you from nearEAT</h2>
-              <h3>special tittle goes here</h3>
-              <button className="button-special"> I want it!</button>
+
+              {specials.map((special) => (
+                <div key={special.id}>
+                  <h3>{special.special_name}</h3>
+                  <p>{special.description}</p>
+
+                  <QRCodeGenerator
+                    id={special.id}
+                    name={special.special_name}
+                  />
+                </div>
+              ))}
+
               <div className="spacer"></div>
             </div>
           </div>
         </div>
+
         <div className="spacer"></div>
-        <div className="google-maps">google-maps</div>
-        <button className="button-restaurant"> back to search </button>
+
+        <Link className="button-restaurant" to="/">
+          <button>Back to search</button>
+        </Link>
+
+        <div className="google-maps">
+          <MapContainer {...selectedRestaurant} />
+        </div>
       </div>
     );
   }
