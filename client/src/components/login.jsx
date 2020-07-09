@@ -1,13 +1,13 @@
 import React from "react";
-import "./App.css";
+import "../App.css";
 import axios from "axios";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "test",
-      password: 1234,
+      username: "",
+      password: "",
     };
   }
 
@@ -19,30 +19,33 @@ class Login extends React.Component {
 
   login = () => {
     //send login request
-    axios("/users/login", {
+    axios("/api/login", {
       method: "POST",
       data: {
         username: this.state.username,
         password: this.state.password,
       },
     })
-      .then((result) => {
-        //store it locally
-        localStorage.setItem("token", result.data.token);
-        console.log(result.data.message, result.data.token);
+      .then((response) => {
+        // console.log(response);
+        //store my token locally
+        //setItem = localstorage method
+        localStorage.setItem("token", response.data.token);
+        console.log(response.data.message, response.data.token);
       })
       .catch((error) => console.log(error));
   };
 
   requestData = () => {
     //request private data
-    axios("/users/profile", {
+    axios("/api/profile", {
       method: "GET",
       headers: {
+        //getItem = localstorage method
         "x-access-token": localStorage.getItem("token"),
       },
     })
-      .then((result) => console.log(result.data.message))
+      .then((response) => console.log(response.data.message))
       .catch((error) => console.log(error));
   };
 

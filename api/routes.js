@@ -100,6 +100,8 @@ routes.get("/restaurants/:id", async (req, res) => {
 
 // POST LOGIN (PENDING CONFIRMATION JWT AUTHENTICATION)
 routes.post("/login", (req, res) => {
+  //check if there is someone with this username and password
+  
   const { username, password } = req.body;
   db(
     `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`
@@ -109,7 +111,9 @@ routes.post("/login", (req, res) => {
       if (results.data.length) {
         //yes, there is a user
         //need to generate new token - user ok
-        var token = jwt.sign({ id: results.data[0].id }, "supersecret");
+
+        var token = jwt.sign({ id: results.data[0].id }, supersecret);
+
         //send token to user
         res.send({ message: "user OK, here is your token", token });
       } else {
@@ -120,24 +124,28 @@ routes.post("/login", (req, res) => {
 });
 
 //this endpoint is protected
-// router.get('/profile', function (req, res, next) {
-// 	//grab the token
-// 	const token = req.headers['x-access-token'];
-// 	if (!token) {
-// 		res.status(401).send({ message: 'Please, log in' });
-// 	} else {
-// 		//I have the token
-// 		jwt.verify(token, supersecret, function (err, decoded) {
-// 			if (err) res.status(401).send({ message: err.message });
-// 			else {
-// 				//everything's good
-// 				//send private info to user
-// 				const { id } = decoded;
-// 				res.send({ message: `Here is the private data for user ${id}` });
-// 			}
-// 		});
-// 	}
-// });
+//how to verify user is correctly logged in when they require private endpoint
+routes.get("/profile", function (req, res, next) {
+  //grab the token
+  const token = req.headers["x-access-token"];
+  if (!token) {
+    res.status(401).send({ message: "Please, log in" });
+  } else {
+    console.log({ token, supersecret });
+    //I have the token
+    jwt.verify(token, supersecret, function (err, decoded) {
+      if (err) res.status(401).send({ message: err.message });
+      else {
+        //everything's good
+        //send private info to user
+        const { id } = decoded;
+        res.send({
+          message: `Here is the private information for user ${id}`,
+        });
+      }
+    });
+  }
+});
 
 // GET USER/OWNER DETAILS (PENDING CONFIRMATION JWT AUTHENTICATION)
 // routes.get("/users/:id", (req, res) => {
