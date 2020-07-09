@@ -6,8 +6,9 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
+      username: "David Fuentes",
+      password: "davfue",
+      // userId: "",
     };
   }
 
@@ -46,6 +47,7 @@ class Login extends React.Component {
       },
     })
       .then((response) => console.log(response.data.message))
+      // .then((response) => this.setState({ userId: response.data.id }))
       .catch((error) => console.log(error));
   };
 
@@ -76,7 +78,7 @@ class Login extends React.Component {
             className=" btn btn-outline-primary"
             onClick={this.requestData}
           >
-            Request protected data
+            My profile
           </button>
         </div>
       </div>

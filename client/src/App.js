@@ -19,13 +19,13 @@ function App() {
       <Router>
         <ScrollToTop>
           <Switch>
+             <Route path="/login" exact>
+              <Login></Login>
+            </Route>
             <Route path="/" exact>
               <Home></Home>
             </Route>
             <Route path="/restaurant/:id" exact component={Restaurant}></Route>
-            <Route path="/login" exact>
-              <Login></Login>
-            </Route>
             <Route path="/results" exact>
               <Results></Results>
             </Route>
