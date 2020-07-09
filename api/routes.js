@@ -65,8 +65,6 @@ routes.get("/search", (req, res) => {
 
   dbQuery += " ORDER BY restaurants.id ASC;";
 
-  console.log(dbQuery);
-
   db(dbQuery).then((results) => {
     res.send(results.data);
   });
@@ -103,6 +101,7 @@ routes.get("/restaurants/:id", async (req, res) => {
 // POST LOGIN (PENDING CONFIRMATION JWT AUTHENTICATION)
 routes.post("/login", (req, res) => {
   //check if there is someone with this username and password
+  
   const { username, password } = req.body;
   db(
     `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`
@@ -112,7 +111,9 @@ routes.post("/login", (req, res) => {
       if (results.data.length) {
         //yes, there is a user
         //need to generate new token - user ok
+
         var token = jwt.sign({ id: results.data[0].id }, supersecret);
+
         //send token to user
         res.send({ message: "user OK, here is your token", token });
       } else {

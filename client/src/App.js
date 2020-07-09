@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Home from "./home.jsx";
 import Restaurant from "./restaurant.jsx";
+
 import Login from "./components/Login.jsx";
 import {
   BrowserRouter as Router,
@@ -10,6 +11,8 @@ import {
   Redirect,
   Link,
 } from "react-router-dom";
+import Results from "./Results.jsx";
+
 
 function App() {
   return (
@@ -25,6 +28,11 @@ function App() {
           <Route path="/restaurant" exact>
             <Restaurant></Restaurant>
           </Route>
+
+          <Route path="/results" exact>
+            <Results></Results>
+          </Route>
+
         </Switch>
       </Router>
     </div>
