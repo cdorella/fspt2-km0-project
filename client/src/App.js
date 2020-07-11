@@ -3,6 +3,8 @@ import "./App.css";
 import Home from "./home.jsx";
 import Restaurant from "./restaurant.jsx";
 import Login from "./components/login.jsx";
+import UserProfile from "./components/userProfile.jsx";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,8 +21,7 @@ function App() {
       <Router>
         <ScrollToTop>
           <Switch>
-             <Route path="/login" exact>
-              <Login></Login>
+              <Route path="/login" exact component={Login}>
             </Route>
             <Route path="/" exact>
               <Home></Home>
@@ -29,6 +30,9 @@ function App() {
             <Route path="/results" exact>
               <Results></Results>
             </Route>
+            <Route path="/profile" exact>
+            <UserProfile></UserProfile>
+          </Route>
           </Switch>
         </ScrollToTop>
       </Router>

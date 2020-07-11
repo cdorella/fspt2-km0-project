@@ -140,7 +140,8 @@ routes.get("/profile", function (req, res, next) {
         //send private info to user
         const { id } = decoded;
         res.send({
-          message: `Here is the private information for user ${id}`,
+          // message: `Here is the private information for user ${id}`,
+          id,
         });
       }
     });
