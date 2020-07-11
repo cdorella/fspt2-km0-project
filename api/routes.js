@@ -16,7 +16,7 @@ routes.get("/", (req, res) => {
 
 // GET ALL CUISINES
 routes.get("/cuisines", (req, res) => {
-  db("SELECT * FROM cuisines;")
+  db("SELECT * FROM cuisines ORDER BY cuisine_name ASC;")
     .then((results) => {
       if (results.error) {
         res.status(400).send({ message: "There was an error" });

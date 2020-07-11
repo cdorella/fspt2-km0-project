@@ -37,6 +37,7 @@ class MapContainer extends React.Component {
 
   render() {
     const { name, address, longitude, latitude } = this.props;
+
     return (
       <Map
         google={this.props.google}
