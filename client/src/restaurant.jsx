@@ -27,9 +27,7 @@ class Restaurant extends React.Component {
           specials: response.specials,
         });
       })
-      .catch(() => {
-        this.setState({ error: true });
-      });
+      .catch((error) => console.log(error));
   };
 
   render() {

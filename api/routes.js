@@ -177,24 +177,37 @@ routes.get("/users/:id/restaurants", (req, res) => {
 });
 
 // GET SPECIALS BY RESTAURANT
-routes.get("/restaurants/:id/specials", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const restaurantData = await db(
-      `SELECT restaurants.id, restaurants.name FROM restaurants WHERE restaurants.id ='${id}';`
-    );
-    const specials = await db(
-      `SELECT id, special_name, description FROM specials WHERE restaurantId = ${id}`
-    );
+// routes.get("/restaurants/:id/specials", async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const restaurantData = await db(
+//       `SELECT restaurants.id, restaurants.name FROM restaurants WHERE restaurants.id ='${id}';`
+//     );
+//     const specials = await db(
+//       `SELECT id, special_name, description FROM specials WHERE restaurantId = ${id}`
+//     );
 
-    res.send({
-      id: restaurantData.data[0].id,
-      name: restaurantData.data[0].name,
-      specials: specials.data,
-    });
-  } catch (err) {
-    res.status(500).send(err);
-  }
+//     res.send({
+//       specials: specials.data,
+//     });
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// });
+// GET SPECIALS BY RESTAURANT - NEW VERSION
+
+routes.get("/restaurants/:id/specials", (req, res) => {
+  const { id } = req.params;
+  db(
+    `SELECT id, special_name, description FROM specials WHERE restaurantId = ${id}`
+  )
+    .then((results) => {
+      if (results.error) {
+        res.status(400).send({ message: "There was an error" });
+      }
+      res.send(results.data);
+    })
+    .catch((err) => res.status(500).send(err));
 });
 
 // POST SPECIAL
