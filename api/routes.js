@@ -26,7 +26,7 @@ routes.get("/cuisines", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-// GET ALL RESTAURANTS (CURRENTLY NOT NEEDED)
+// GET ALL RESTAURANTS
 routes.get("/restaurants", (req, res) => {
   db("SELECT * FROM restaurants;")
     .then((results) => {
@@ -98,7 +98,7 @@ routes.get("/restaurants/:id", async (req, res) => {
   }
 });
 
-// POST LOGIN (PENDING CONFIRMATION JWT AUTHENTICATION)
+// POST LOGIN
 routes.post("/login", (req, res) => {
   //check if there is someone with this username and password
 
@@ -113,9 +113,10 @@ routes.post("/login", (req, res) => {
         //need to generate new token - user ok
 
         var token = jwt.sign({ id: results.data[0].id }, supersecret);
+        var id = results.data[0].id;
 
         //send token to user
-        res.send({ message: "user OK, here is your token", token });
+        res.send({ message: "user OK, here is your token", token, id });
       } else {
         res.status(404).send({ message: "User not found" });
       }
@@ -123,6 +124,7 @@ routes.post("/login", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
+// GET PROFILE
 //this endpoint is protected
 //how to verify user is correctly logged in when they require private endpoint
 routes.get("/profile", function (req, res, next) {
@@ -148,19 +150,6 @@ routes.get("/profile", function (req, res, next) {
   }
 });
 
-// GET USER/OWNER DETAILS (PENDING CONFIRMATION JWT AUTHENTICATION)
-// routes.get("/users/:id", (req, res) => {
-// 	const { id } = req.params;
-// 	db(`SELECT id, username FROM users WHERE id ='${id}';`)
-// 		.then(results => {
-// 			if (results.error) {
-// 				res.status(400).send({ message: "There was an error" });
-// 			}
-// 			res.send(results.data);
-// 		})
-// 		.catch(err => res.status(500).send(err));
-// });
-
 // GET ALL RESTAURANTS BY USER/OWNER
 routes.get("/users/:id/restaurants", (req, res) => {
   const { id } = req.params;
@@ -177,37 +166,22 @@ routes.get("/users/:id/restaurants", (req, res) => {
 });
 
 // GET SPECIALS BY RESTAURANT
-// routes.get("/restaurants/:id/specials", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const restaurantData = await db(
-//       `SELECT restaurants.id, restaurants.name FROM restaurants WHERE restaurants.id ='${id}';`
-//     );
-//     const specials = await db(
-//       `SELECT id, special_name, description FROM specials WHERE restaurantId = ${id}`
-//     );
-
-//     res.send({
-//       specials: specials.data,
-//     });
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// });
-// GET SPECIALS BY RESTAURANT - NEW VERSION
-
-routes.get("/restaurants/:id/specials", (req, res) => {
-  const { id } = req.params;
-  db(
-    `SELECT id, special_name, description FROM specials WHERE restaurantId = ${id}`
-  )
-    .then((results) => {
-      if (results.error) {
-        res.status(400).send({ message: "There was an error" });
-      }
-      res.send(results.data);
-    })
-    .catch((err) => res.status(500).send(err));
+routes.get("/restaurants/:id/specials", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const restaurantData = await db(
+      `SELECT restaurants.id, restaurants.name FROM restaurants WHERE restaurants.id ='${id}';`
+    );
+    const specials = await db(
+      `SELECT id, special_name, description FROM specials WHERE restaurantId = ${id}`
+    );
+    res.send({
+      name: restaurantData.data[0].name,
+      specials: specials.data,
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 // POST SPECIAL
