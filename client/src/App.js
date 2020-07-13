@@ -1,18 +1,12 @@
 import React from "react";
 import "./App.css";
-import Home from "./home.jsx";
-import Restaurant from "./restaurant.jsx";
+import Home from "./pages/home.jsx";
+import Restaurant from "./pages/restaurant.jsx";
 import Login from "./components/login.jsx";
 import UserProfile from "./components/userProfile.jsx";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-  Link,
-} from "react-router-dom";
-import Results from "./Results.jsx";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Results from "./pages/results.jsx";
 import ScrollToTop from "./components/scroll_to_top.jsx";
 
 function App() {
@@ -32,7 +26,6 @@ function App() {
             <Route path="/profile" exact>
               <UserProfile></UserProfile>
               {/* <Route path="/profile/:id" exact component={UserProfile}></Route> */}
-
             </Route>
           </Switch>
         </ScrollToTop>

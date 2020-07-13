@@ -6,10 +6,8 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
       username: "",
       password: "",
-
     };
   }
 
@@ -19,7 +17,8 @@ class Login extends React.Component {
     });
   };
 
-  login = () => {
+  login = (event) => {
+    event.preventDefault();
     //send login request
     axios("/api/login", {
       method: "POST",
@@ -44,25 +43,25 @@ class Login extends React.Component {
     return (
       <div>
         <div>
-          <input
-            value={this.state.username}
-            onChange={this.handleChange}
-            name="username"
-            type="text"
-            placeholder="username"
-            className="form-control mb-2"
-          />
-          <input
-            value={this.state.password}
-            onChange={this.handleChange}
-            name="password"
-            type="password"
-            placeholder="password"
-            className="form-control mb-2"
-          />
-          <button className=" btn btn-primary" onClick={this.login}>
-            Log in
-          </button>
+          <form onSubmit={this.login}>
+            <input
+              value={this.state.username}
+              onChange={this.handleChange}
+              name="username"
+              type="text"
+              placeholder="username"
+              className="form-control mb-2"
+            />
+            <input
+              value={this.state.password}
+              onChange={this.handleChange}
+              name="password"
+              type="password"
+              placeholder="password"
+              className="form-control mb-2"
+            />
+            <button className=" btn btn-primary">Log in</button>
+          </form>
         </div>
       </div>
     );

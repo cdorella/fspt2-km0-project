@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
-import "./Results.css";
+import "./results.css";
 
 class Results extends React.Component {
   constructor(props) {
