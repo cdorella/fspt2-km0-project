@@ -23,10 +23,7 @@ function App() {
             <Route path="/results" exact>
               <Results></Results>
             </Route>
-            <Route path="/profile" exact>
-              <UserProfile></UserProfile>
-              {/* <Route path="/profile/:id" exact component={UserProfile}></Route> */}
-            </Route>
+            <Route path="/profile" exact component={UserProfile}></Route>
           </Switch>
         </ScrollToTop>
       </Router>

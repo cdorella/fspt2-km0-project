@@ -33,8 +33,6 @@ class Login extends React.Component {
         //setItem = localstorage method
         localStorage.setItem("token", response.data.token);
         this.props.history.push("/profile");
-        // const id = response.data.id
-        // this.props.history.push(`/profile/${id}`);
       })
       .catch((error) => console.log(error));
   };
