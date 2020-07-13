@@ -1,7 +1,7 @@
 import React from "react";
 import "./restaurant.css";
-import MapContainer from "./components/map_container";
-import QRCodeGenerator from "./components/qr_code_generator";
+import MapContainer from "../components/map_container";
+import QRCodeGenerator from "../components/qr_code_generator";
 import { Link } from "react-router-dom";
 
 class Restaurant extends React.Component {
@@ -35,7 +35,7 @@ class Restaurant extends React.Component {
 
     let price = "";
     if (selectedRestaurant.price === 1) {
-      price = "Cheap Eats";
+      price = "Budget";
     } else if (selectedRestaurant.price === 2) {
       price = "Mid-range";
     } else if (selectedRestaurant.price === 3) {
