@@ -117,7 +117,9 @@ class Home extends React.Component {
               <div class="nl-field nl-dd">
                 <label>
                   Hey! I feel like eating some local, seasonal and sustainable
+
                   food. Looking for{" "}
+
                 </label>
 
                 <select onChange={this.handleCuisine}>
