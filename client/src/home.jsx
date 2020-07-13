@@ -1,6 +1,6 @@
 import React from "react";
 import "./home.css";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 class Home extends React.Component {
   constructor(props) {
@@ -107,6 +107,10 @@ class Home extends React.Component {
               </div>
             </div>
           </div>
+
+          <Link className="button-restaurant" to="/login">
+            <button>Admin Access</button>
+          </Link>
 
           <div className="form-container">
             <form className="form-home">

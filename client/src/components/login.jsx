@@ -1,15 +1,15 @@
 import React from "react";
 import "../App.css";
 import axios from "axios";
-import UserProfile from "./userProfile";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "davidfuentes@gmail.com",
-      password: "davfue",
-      userId: 0,
+
+      username: "",
+      password: "",
+
     };
   }
 
@@ -33,9 +33,9 @@ class Login extends React.Component {
         //store my token locally
         //setItem = localstorage method
         localStorage.setItem("token", response.data.token);
-        // this.requestData();
-        // console.log(response.data.message, response.data.token);
         this.props.history.push("/profile");
+        // const id = response.data.id
+        // this.props.history.push(`/profile/${id}`);
       })
       .catch((error) => console.log(error));
   };
@@ -49,6 +49,7 @@ class Login extends React.Component {
             onChange={this.handleChange}
             name="username"
             type="text"
+            placeholder="username"
             className="form-control mb-2"
           />
           <input
@@ -56,6 +57,7 @@ class Login extends React.Component {
             onChange={this.handleChange}
             name="password"
             type="password"
+            placeholder="password"
             className="form-control mb-2"
           />
           <button className=" btn btn-primary" onClick={this.login}>

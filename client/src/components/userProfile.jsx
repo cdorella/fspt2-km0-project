@@ -6,9 +6,10 @@ class UserProfile extends Component {
     super(props);
     this.state = {
       restaurants: [],
+      selected: false,
       specials: [],
       restaurantId: 0,
-      success: false,
+      restaurantName: "",
       special_name: "",
       description: "",
       login: true,
@@ -36,7 +37,7 @@ class UserProfile extends Component {
   };
 
   getRestaurantsByUser = (id) => {
-    fetch(`http://localhost:5000/api/users/${id}/restaurants`)
+    fetch(`api/users/${id}/restaurants`)
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
@@ -48,11 +49,13 @@ class UserProfile extends Component {
   };
 
   getSpecials = (id) => {
-    fetch(`http://localhost:5000/api/restaurants/${id}/specials`)
+    fetch(`api/restaurants/${id}/specials`)
       .then((response) => response.json())
       .then((response) => {
         this.setState({
-          specials: response,
+          selected: true,
+          specials: response.specials,
+          restaurantName: response.name,
           restaurantId: id,
         });
       })
@@ -60,6 +63,7 @@ class UserProfile extends Component {
   };
 
   deleteSpecial = (id) => {
+    const { restaurantId } = this.state;
     fetch(`/api/specials/${id}`, {
       method: "DELETE",
       headers: {
@@ -67,11 +71,8 @@ class UserProfile extends Component {
       },
     })
       .then((response) => response.json())
-      .then((response) => {
-        // upon success, update tasks
-        this.setState({
-          success: true,
-        });
+      .then(() => {
+        this.getSpecials(restaurantId);
       })
       .catch((error) => console.log(error));
   };
@@ -85,42 +86,40 @@ class UserProfile extends Component {
   };
 
   handleSubmit = (event) => {
+    const { restaurantId } = this.state;
     event.preventDefault();
-    this.addSpecial();
+    this.addSpecial(restaurantId);
     this.setState({
       special_name: "",
       description: "",
     });
   };
-  // WORK IN PROGRESS
-  addSpecial = () => {
-    const { restaurantId, special_name, description } = this.state;
-    console.log(restaurantId, special_name, description);
-    // fetch(
-    //   `http://localhost:5000/api/restaurants/${restaurantId}/specials`,
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       special_name: special_name,
-    //       description: description,
-    //       restaurantId: restaurantId,
-    //     }),
-    //   }
-    //     .then((response) => response.json())
-    //     .then((response) => console.log(response))
-    //     .catch((error) => console.log(error))
-    // );
-    // fetch(`http://localhost:5000/api/restaurants/${restaurantId}/specials`)
-    //   .then((response) => response.json())
-    //   .then((response) => {
-    //     this.setState({
-    //       specials: response,
-    //     });
-    //   })
-    //   .catch((error) => console.log(error));
+
+  addSpecial = (id) => {
+    const { special_name, description } = this.state;
+
+    fetch(`/api/restaurants/${id}/specials`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        special_name: special_name,
+        description: description,
+        restaurantId: id,
+      }),
+    })
+      .then((response) => response.json())
+      .then(() => {
+        this.getSpecials(id);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  logout = () => {
+    this.setState({
+      login: !this.state.login,
+    });
   };
 
   logout = () => {
@@ -132,60 +131,77 @@ class UserProfile extends Component {
   render() {
     const {
       restaurants,
+      selected,
       specials,
-      success,
+      restaurantName,
       special_name,
       description,
       login,
     } = this.state;
+
     return (
       <div>
-        <h1>Your restaurants</h1>
+        <h1>Welcome Admin!</h1>
+        <h2>Your restaurants:</h2>
         {restaurants.map((restaurant) => (
           <div key={restaurant.id}>
-            <h3>Name: {restaurant.name}</h3>
+            <h3>{restaurant.name}</h3>
             <h3>Address: {restaurant.address}</h3>
             <button onClick={() => this.getSpecials(restaurant.id)}>
+
               Click here to see your Specials
+
             </button>
+          </div>
+        ))}
+
+        {selected && (
+          <div>
+            <h2>Specials for restaurant: {restaurantName}</h2>
             {specials.map((special) => (
               <div key={special.id}>
                 <h3>Name: {special.special_name}</h3>
                 <h3>Description: {special.description}</h3>
                 <button onClick={() => this.deleteSpecial(special.id)}>
-                  Click here to delete this Special
+                  Click here to delete this special
                 </button>
               </div>
             ))}
-          </div>
-        ))}
-        {/* MISSING WORK OUT HOW TO MAKE SPECIAL DISSAPEAR */}
-        {success && (
-          <div>
-            <h2>Special Deleted!</h2>
+            <div>
+              <h3>Add a Special</h3>
+              <form onSubmit={this.handleSubmit}>
+                <label>Special Name: </label>
+                <input
+                  type="text"
+                  placeholder="add name"
+                  name="special_name"
+                  value={special_name}
+                  onChange={this.handleInputChange}
+                />
+                <label>Description: </label>
+                <textarea
+                  type="text"
+                  placeholder="add description"
+                  name="description"
+                  rows="4"
+                  cols="40"
+                  value={description}
+                  onChange={this.handleInputChange}
+                />
+                <button>Click here to add a new special</button>
+              </form>
+            </div>
           </div>
         )}
+
         <div>
-          <h3>Add Special</h3>
-          <form onSubmit={this.handleSubmit}>
-            <label>Special Name: </label>
-            <input
-              type="text"
-              placeholder="add name"
-              name="special_name"
-              value={special_name}
-              onChange={this.handleInputChange}
-            />
-            <label>Special Description: </label>
-            <input
-              type="text"
-              placeholder="add description"
-              name="description"
-              value={description}
-              onChange={this.handleInputChange}
-            />
-          </form>
-          <button>Click here to Add Special</button>
+          {login ? (
+            <button onClick={this.logout}>LOG OUT</button>
+          ) : (
+            <a href="http://localhost:3000/login">
+              <button>Back to log in</button>
+            </a>
+          )}
         </div>
         <div>
           {login ? (

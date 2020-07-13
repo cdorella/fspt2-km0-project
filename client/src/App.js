@@ -31,6 +31,8 @@ function App() {
             </Route>
             <Route path="/profile" exact>
               <UserProfile></UserProfile>
+              {/* <Route path="/profile/:id" exact component={UserProfile}></Route> */}
+
             </Route>
           </Switch>
         </ScrollToTop>
