@@ -1,25 +1,31 @@
 import React from "react";
 import "./App.css";
-import Home from "./home.jsx";
-import Restaurant from "./restaurant.jsx";
-import Results from "./Results.jsx";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Home from "./pages/home.jsx";
+import Restaurant from "./pages/restaurant.jsx";
+import Login from "./components/login.jsx";
+import UserProfile from "./components/userProfile.jsx";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Results from "./pages/results.jsx";
+import ScrollToTop from "./components/scroll_to_top.jsx";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route path="/" exact>
-            <Home></Home>
-          </Route>
-          <Route path="/restaurant" exact>
-            <Restaurant></Restaurant>
-          </Route>
-          <Route path="/results" exact>
-            <Results></Results>
-          </Route>
-        </Switch>
+        <ScrollToTop>
+          <Switch>
+            <Route path="/login" exact component={Login}></Route>
+            <Route path="/" exact>
+              <Home></Home>
+            </Route>
+            <Route path="/restaurant/:id" exact component={Restaurant}></Route>
+            <Route path="/results" exact>
+              <Results></Results>
+            </Route>
+            <Route path="/profile" exact component={UserProfile}></Route>
+          </Switch>
+        </ScrollToTop>
       </Router>
     </div>
   );

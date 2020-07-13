@@ -16,7 +16,7 @@ routes.get("/", (req, res) => {
 
 // GET ALL CUISINES
 routes.get("/cuisines", (req, res) => {
-  db("SELECT * FROM cuisines;")
+  db("SELECT * FROM cuisines ORDER BY cuisine_name ASC;")
     .then((results) => {
       if (results.error) {
         res.status(400).send({ message: "There was an error" });
@@ -26,7 +26,7 @@ routes.get("/cuisines", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-// GET ALL RESTAURANTS (CURRENTLY NOT NEEDED)
+// GET ALL RESTAURANTS
 routes.get("/restaurants", (req, res) => {
   db("SELECT * FROM restaurants;")
     .then((results) => {
@@ -98,8 +98,10 @@ routes.get("/restaurants/:id", async (req, res) => {
   }
 });
 
-// POST LOGIN (PENDING CONFIRMATION JWT AUTHENTICATION)
+// POST LOGIN
 routes.post("/login", (req, res) => {
+  //check if there is someone with this username and password
+
   const { username, password } = req.body;
   db(
     `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`
@@ -109,9 +111,12 @@ routes.post("/login", (req, res) => {
       if (results.data.length) {
         //yes, there is a user
         //need to generate new token - user ok
-        var token = jwt.sign({ id: results.data[0].id }, "supersecret");
+
+        var token = jwt.sign({ id: results.data[0].id }, supersecret);
+        var id = results.data[0].id;
+
         //send token to user
-        res.send({ message: "user OK, here is your token", token });
+        res.send({ message: "user OK, here is your token", token, id });
       } else {
         res.status(404).send({ message: "User not found" });
       }
@@ -119,38 +124,31 @@ routes.post("/login", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
+// GET PROFILE
 //this endpoint is protected
-// router.get('/profile', function (req, res, next) {
-// 	//grab the token
-// 	const token = req.headers['x-access-token'];
-// 	if (!token) {
-// 		res.status(401).send({ message: 'Please, log in' });
-// 	} else {
-// 		//I have the token
-// 		jwt.verify(token, supersecret, function (err, decoded) {
-// 			if (err) res.status(401).send({ message: err.message });
-// 			else {
-// 				//everything's good
-// 				//send private info to user
-// 				const { id } = decoded;
-// 				res.send({ message: `Here is the private data for user ${id}` });
-// 			}
-// 		});
-// 	}
-// });
-
-// GET USER/OWNER DETAILS (PENDING CONFIRMATION JWT AUTHENTICATION)
-// routes.get("/users/:id", (req, res) => {
-// 	const { id } = req.params;
-// 	db(`SELECT id, username FROM users WHERE id ='${id}';`)
-// 		.then(results => {
-// 			if (results.error) {
-// 				res.status(400).send({ message: "There was an error" });
-// 			}
-// 			res.send(results.data);
-// 		})
-// 		.catch(err => res.status(500).send(err));
-// });
+//how to verify user is correctly logged in when they require private endpoint
+routes.get("/profile", function (req, res, next) {
+  //grab the token
+  const token = req.headers["x-access-token"];
+  if (!token) {
+    res.status(401).send({ message: "Please, log in" });
+  } else {
+    console.log({ token, supersecret });
+    //I have the token
+    jwt.verify(token, supersecret, function (err, decoded) {
+      if (err) res.status(401).send({ message: err.message });
+      else {
+        //everything's good
+        //send private info to user
+        const { id } = decoded;
+        res.send({
+          // message: `Here is the private information for user ${id}`,
+          id,
+        });
+      }
+    });
+  }
+});
 
 // GET ALL RESTAURANTS BY USER/OWNER
 routes.get("/users/:id/restaurants", (req, res) => {
@@ -177,9 +175,7 @@ routes.get("/restaurants/:id/specials", async (req, res) => {
     const specials = await db(
       `SELECT id, special_name, description FROM specials WHERE restaurantId = ${id}`
     );
-
     res.send({
-      id: restaurantData.data[0].id,
       name: restaurantData.data[0].name,
       specials: specials.data,
     });

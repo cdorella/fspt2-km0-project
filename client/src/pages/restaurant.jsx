@@ -1,6 +1,8 @@
 import React from "react";
 import "./restaurant.css";
-import MapContainer from "./components/MapContainer";
+import MapContainer from "../components/map_container";
+import QRCodeGenerator from "../components/qr_code_generator";
+import { Link } from "react-router-dom";
 
 class Restaurant extends React.Component {
   constructor(props) {
@@ -11,11 +13,13 @@ class Restaurant extends React.Component {
     };
   }
 
-  // ID TO COME FROM SELECTION ON HOME PAGE
-  // getRestaurantById = (restaurantId) => () => {
-  // fetch(`/api/restaurants/${restaurantId}`)
-  getRestaurantById = () => {
-    fetch(`/api/restaurants/1`) // FOR NOW JUST FOR TESTING USING ID #1
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.getRestaurantById(id);
+  }
+
+  getRestaurantById = (restaurantId) => {
+    fetch(`/api/restaurants/${restaurantId}`)
       .then((response) => response.json())
       .then((response) => {
         this.setState({
@@ -23,18 +27,15 @@ class Restaurant extends React.Component {
           specials: response.specials,
         });
       })
-      .catch(() => {
-        this.setState({ error: true });
-      });
+      .catch((error) => console.log(error));
   };
 
   render() {
     const { selectedRestaurant, specials } = this.state;
 
     let price = "";
-
     if (selectedRestaurant.price === 1) {
-      price = "Cheap Eats";
+      price = "Budget";
     } else if (selectedRestaurant.price === 2) {
       price = "Mid-range";
     } else if (selectedRestaurant.price === 3) {
@@ -50,11 +51,6 @@ class Restaurant extends React.Component {
               className="restaurant-banner"
             ></img>
           </div>
-
-          {/* THIS BUTTON WAS ADDED JUST SO THAT I HAVE DATA TO WORK WITH **CAROLINA*/}
-          <button className="button-special" onClick={this.getRestaurantById}>
-            Submit
-          </button>
 
           <div className="restaurant-name">
             {" "}
@@ -81,22 +77,33 @@ class Restaurant extends React.Component {
           <div className="special-container">
             <div className="special">
               <h2>We have a special for you from nearEAT</h2>
+
               {specials.map((special) => (
                 <div key={special.id}>
                   <h3>{special.special_name}</h3>
                   <p>{special.description}</p>
+
+                  <QRCodeGenerator
+                    id={special.id}
+                    name={special.special_name}
+                  />
                 </div>
               ))}
-              <button className="button-special"> I want it!</button>
+
               <div className="spacer"></div>
             </div>
           </div>
         </div>
+
         <div className="spacer"></div>
+
+        <Link className="button-restaurant" to="/">
+          <button>Back to search</button>
+        </Link>
+
         <div className="google-maps">
           <MapContainer {...selectedRestaurant} />
         </div>
-        <button className="button-restaurant"> back to search </button>
       </div>
     );
   }

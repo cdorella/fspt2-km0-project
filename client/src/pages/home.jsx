@@ -1,17 +1,26 @@
 import React from "react";
 import "./home.css";
+import { Link, withRouter } from "react-router-dom";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       cuisines: [],
-      price: "",
+      selectedCuisine: "",
+      selectedPrice: "",
+      restaurants: [],
     };
   }
 
   componentDidMount() {
     this.getCuisines();
+  }
+
+  componentWillUnmount() {
+    this.setState = (state, callback) => {
+      return;
+    };
   }
 
   getCuisines = () => {
@@ -22,11 +31,63 @@ class Home extends React.Component {
       });
   };
 
-  handleChange = (event) => {
-    const { value, name } = event.target;
-    this.setState({
-      [name]: value,
-    });
+  handleCuisine = (event) => {
+    const { value } = event.target;
+    const newState = {
+      selectedCuisine: [`cuisine_name=${value}`],
+    };
+    this.setState(newState);
+  };
+
+  handlePrice = (event) => {
+    const { value } = event.target;
+
+    let price = 0;
+    if (value === "budget") {
+      price = 1;
+    } else if (value === "mid-range") {
+      price = 2;
+    } else if (value === "fine dining") {
+      price = 3;
+    }
+
+    const newState = {
+      selectedPrice: [`price=${price}`],
+    };
+    this.setState(newState);
+  };
+
+  handleSearchQuery = (event) => {
+    const { selectedCuisine, selectedPrice } = this.state;
+    event.preventDefault();
+
+    let queryString = [];
+
+    if (selectedCuisine.length) {
+      queryString.push(selectedCuisine);
+    }
+    if (selectedPrice.length) {
+      queryString.push(selectedPrice);
+    }
+    if (!queryString.length) {
+      this.fetchSearchResults(`api/search`);
+    }
+
+    this.fetchSearchResults(`api/search?${queryString.join("&")}`);
+  };
+
+  fetchSearchResults = (url) => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        this.setState({
+          restaurants: response,
+        });
+        this.props.history.push({
+          pathname: "/results",
+          state: { restaurants: this.state.restaurants },
+        });
+      });
   };
 
   render() {
@@ -47,33 +108,42 @@ class Home extends React.Component {
             </div>
           </div>
 
+          <Link className="button-restaurant" to="/login">
+            <button>Admin Access</button>
+          </Link>
+
           <div className="form-container">
             <form className="form-home">
               <div class="nl-field nl-dd">
                 <label>
-                  Hey! I feel like eating some km.0 and concious food. Looking
-                  for
+                  Hey! I feel like eating some local, seasonal and sustainable
+
+                  food. Looking for{" "}
+
                 </label>
 
-                <select>
-                  <option> any style </option>
+                <select onChange={this.handleCuisine}>
+                  <option> any cuisine style </option>
                   {this.state.cuisines.map((cuisine) => (
-                    <option Id={cuisine.id} key={cuisine.id}>
-                      {cuisine.cuisine_name}
+                    <option id={cuisine.id} key={cuisine.id}>
+                      {cuisine.cuisine_name.toLowerCase()}
                     </option>
                   ))}
                 </select>
-                <label> and I want it to be</label>
-                <select>
-                  <option> any price</option>
-                  <option> cheap </option>
-                  <option> regular price </option>
-                  <option> something fancy </option>
+                <label> and I would like it to be </label>
+                <select onChange={this.handlePrice}>
+                  <option> any price </option>
+                  <option> budget </option>
+                  <option> mid-range </option>
+                  <option> fine dining </option>
                 </select>
               </div>
             </form>
             <div className="spacer2"></div>
-            <button className="button-form"> Find a place!</button>
+            <button className="button-form" onClick={this.handleSearchQuery}>
+              {" "}
+              Find a place!
+            </button>
           </div>
         </div>
         <div className="spacer1"></div>
@@ -102,15 +172,15 @@ class Home extends React.Component {
                   <div className="space-home2"></div>
                   <p>
                     {" "}
-                    Eat fresh and concious products that are produced neer to
-                    you. We guarantee quality in all the ingredients the
+                    eat fresh and conscious products that are produced near you.
+                    We guarantee the quality of all the ingredients the
                     restaurants in our webpage select
                   </p>
                 </div>
               </div>
               <div className="section-one-content1">
                 <div className="little-header">
-                  <h3>help local business</h3>
+                  <h3>help local businesses</h3>
                 </div>
                 <div className="little-img">
                   <img
@@ -123,9 +193,9 @@ class Home extends React.Component {
                   <div className="space-home2"></div>
                   <p>
                     {" "}
-                    if you eat from restaurants near to you, you are helping
-                    local producers and business owners to reach those customers
-                    that also care about the selection of ingredients
+                    if you eat from restaurants near you, you are helping local
+                    producers and business owners to reach those customers that
+                    also care about the selection of ingredients
                   </p>
                 </div>
               </div>
@@ -149,9 +219,9 @@ class Home extends React.Component {
                   <div className="space-home2"></div>
                   <p>
                     {" "}
-                    why going to the same place when you can find thousands of
-                    new experiences near to you? You will never get bored with
-                    our explorer option
+                    why go to the same place when you can find thousands of new
+                    experiences near you? You will never get bored with our
+                    explorer option
                   </p>
                 </div>
               </div>
@@ -179,4 +249,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);
