@@ -118,14 +118,10 @@ class UserProfile extends Component {
 
   logout = () => {
     this.setState({
-      login: !this.state.login,
+      login: false,
     });
-  };
-
-  logout = () => {
-    this.setState({
-      login: !this.state.login,
-    });
+    window.localStorage.removeItem("token");
+    this.props.history.push("/login");
   };
 
   render() {
@@ -148,9 +144,7 @@ class UserProfile extends Component {
             <h3>{restaurant.name}</h3>
             <h3>Address: {restaurant.address}</h3>
             <button onClick={() => this.getSpecials(restaurant.id)}>
-
               Click here to see your Specials
-
             </button>
           </div>
         ))}
@@ -194,15 +188,6 @@ class UserProfile extends Component {
           </div>
         )}
 
-        <div>
-          {login ? (
-            <button onClick={this.logout}>LOG OUT</button>
-          ) : (
-            <a href="http://localhost:3000/login">
-              <button>Back to log in</button>
-            </a>
-          )}
-        </div>
         <div>
           {login ? (
             <button onClick={this.logout}>LOG OUT</button>

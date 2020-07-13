@@ -43,7 +43,7 @@ class Home extends React.Component {
     const { value } = event.target;
 
     let price = 0;
-    if (value === "cheap eats") {
+    if (value === "budget") {
       price = 1;
     } else if (value === "mid-range") {
       price = 2;
@@ -116,8 +116,8 @@ class Home extends React.Component {
             <form className="form-home">
               <div class="nl-field nl-dd">
                 <label>
-                  Hey! I feel like eating some km.0 and conscious food. Looking
-                  for
+                  Hey! I feel like eating some local, seasonal and sustainable
+                  food. Looking for{" "}
                 </label>
 
                 <select onChange={this.handleCuisine}>
@@ -128,10 +128,10 @@ class Home extends React.Component {
                     </option>
                   ))}
                 </select>
-                <label> and I want it to be </label>
+                <label> and I would like it to be </label>
                 <select onChange={this.handlePrice}>
                   <option> any price </option>
-                  <option> cheap eats </option>
+                  <option> budget </option>
                   <option> mid-range </option>
                   <option> fine dining </option>
                 </select>
@@ -171,14 +171,14 @@ class Home extends React.Component {
                   <p>
                     {" "}
                     eat fresh and conscious products that are produced near you.
-                    We guarantee quality in all the ingredients the restaurants
-                    in our webpage select
+                    We guarantee the quality of all the ingredients the
+                    restaurants in our webpage select
                   </p>
                 </div>
               </div>
               <div className="section-one-content1">
                 <div className="little-header">
-                  <h3>help local business</h3>
+                  <h3>help local businesses</h3>
                 </div>
                 <div className="little-img">
                   <img
@@ -191,9 +191,9 @@ class Home extends React.Component {
                   <div className="space-home2"></div>
                   <p>
                     {" "}
-                    if you eat from restaurants near to you, you are helping
-                    local producers and business owners to reach those customers
-                    that also care about the selection of ingredients
+                    if you eat from restaurants near you, you are helping local
+                    producers and business owners to reach those customers that
+                    also care about the selection of ingredients
                   </p>
                 </div>
               </div>
@@ -218,7 +218,7 @@ class Home extends React.Component {
                   <p>
                     {" "}
                     why go to the same place when you can find thousands of new
-                    experiences near to you? You will never get bored with our
+                    experiences near you? You will never get bored with our
                     explorer option
                   </p>
                 </div>
