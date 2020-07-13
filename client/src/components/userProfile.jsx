@@ -11,6 +11,7 @@ class UserProfile extends Component {
       success: false,
       special_name: "",
       description: "",
+      login: true,
     };
   }
 
@@ -122,6 +123,12 @@ class UserProfile extends Component {
     //   .catch((error) => console.log(error));
   };
 
+  logout = () => {
+    this.setState({
+      login: !this.state.login,
+    });
+  };
+
   render() {
     const {
       restaurants,
@@ -129,6 +136,7 @@ class UserProfile extends Component {
       success,
       special_name,
       description,
+      login,
     } = this.state;
     return (
       <div>
@@ -138,7 +146,7 @@ class UserProfile extends Component {
             <h3>Name: {restaurant.name}</h3>
             <h3>Address: {restaurant.address}</h3>
             <button onClick={() => this.getSpecials(restaurant.id)}>
-              Click here to get your Specials
+              Click here to see your Specials
             </button>
             {specials.map((special) => (
               <div key={special.id}>
@@ -178,6 +186,15 @@ class UserProfile extends Component {
             />
           </form>
           <button>Click here to Add Special</button>
+        </div>
+        <div>
+          {login ? (
+            <button onClick={this.logout}>LOG OUT</button>
+          ) : (
+            <a href="http://localhost:3000/login">
+              <button>Back to log in</button>
+            </a>
+          )}
         </div>
       </div>
     );

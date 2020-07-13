@@ -21,8 +21,7 @@ function App() {
       <Router>
         <ScrollToTop>
           <Switch>
-              <Route path="/login" exact component={Login}>
-            </Route>
+            <Route path="/login" exact component={Login}></Route>
             <Route path="/" exact>
               <Home></Home>
             </Route>
@@ -31,8 +30,8 @@ function App() {
               <Results></Results>
             </Route>
             <Route path="/profile" exact>
-            <UserProfile></UserProfile>
-          </Route>
+              <UserProfile></UserProfile>
+            </Route>
           </Switch>
         </ScrollToTop>
       </Router>
