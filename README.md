@@ -6,7 +6,13 @@
 
 ## Database schema
 
+<img src="images/db%20schema.jpg" >
+
 ## API Routes Plan
+
+<img src="images/API%20route%20design%201.JPG" >
+<img src="images/API%20route%20design%202.JPG" >
+<img src="images/API%20route%20design%203.JPG" >
 
 ## Full Stack Architecture Drawing
 
