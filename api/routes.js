@@ -100,8 +100,6 @@ routes.get("/restaurants/:id", async (req, res) => {
 
 // POST LOGIN
 routes.post("/login", (req, res) => {
-  //check if there is someone with this username and password
-
   const { username, password } = req.body;
   db(
     `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`
@@ -116,7 +114,7 @@ routes.post("/login", (req, res) => {
         var id = results.data[0].id;
 
         //send token to user
-        res.send({ message: "user OK, here is your token", token, id });
+        res.send({ message: "user OK, here is your token", token });
       } else {
         res.status(404).send({ message: "User not found" });
       }
@@ -142,7 +140,7 @@ routes.get("/profile", function (req, res, next) {
         //send private info to user
         const { id } = decoded;
         res.send({
-          // message: `Here is the private information for user ${id}`,
+          //message: `Here is the private information for user ${id}`,
           id,
         });
       }
