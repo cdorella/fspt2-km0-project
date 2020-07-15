@@ -49,3 +49,6 @@ Run `yarn` on root folder to install dependencies related to Express.
 ## Notes
 
 _This is a student project that was created at [CodeOp](http://codeop.tech), a full stack development bootcamp in Barcelona._
+
+
+**(Adding a PR for Jepser's review)
