@@ -16,6 +16,8 @@
 
 ## Full Stack Architecture Drawing
 
+<img src="images/architecture%20drawing.jpg" >
+
 ## Setup
 
 ### Dependencies
