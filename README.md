@@ -7,7 +7,7 @@ NearEAT was inspired by the idea of the KM0 SlowFood Community and by the import
 The main technologies used to develop this project were:
 - NodeJs and Express for the backend.
 - ReactJs, Javascript ES6, HTML and Css for the frontend.
-* [JsonWebToken]https://jwt.io/introduction/ :Used for authentication.
+* [JsonWebToken](https://jwt.io/introduction/): Used for authentication.
 * []https://jwt.io/introduction/
 * https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 * https://tympanus.net/codrops/2013/05/21/natural-language-form-with-custom-input-elements/
@@ -15,7 +15,7 @@ The main technologies used to develop this project were:
 
 ## User Flow Diagram
 
-<a href="https://app.flowmapp.com/projects/139573/userflow/90525/">User Flow</a>
+<a href="https://app.flowmapp.com/share/c7cc46d479c62f24b7da6253fbefbcb2/userflow/90525/">User Flow</a>
 
 ## Database schema
 
