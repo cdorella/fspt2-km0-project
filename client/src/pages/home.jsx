@@ -96,11 +96,7 @@ class Home extends React.Component {
         <div className="access-container">
           <div className="left-access"></div>
           <div className="right-login">
-            <NavLink
-              to="/login"
-              className="nnn"
-              onClick={() => console.log("hola test")}
-            >
+            <NavLink to="/login" className="access-login">
               Admin Access
             </NavLink>
           </div>

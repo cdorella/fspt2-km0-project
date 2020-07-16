@@ -145,7 +145,7 @@ class UserProfile extends Component {
           <div className="logout">
             <div>
               {login ? (
-                <button onClick={this.logout} className="button-profile">
+                <button onClick={this.logout} className="button-logout">
                   LOG OUT
                 </button>
               ) : (
