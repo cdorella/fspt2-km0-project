@@ -21,11 +21,9 @@ class UserProfile extends Component {
   }
 
   requestData = () => {
-    //request private data
     axios("/api/profile", {
       method: "GET",
       headers: {
-        //getItem = localstorage method
         "x-access-token": localStorage.getItem("token"),
       },
     })

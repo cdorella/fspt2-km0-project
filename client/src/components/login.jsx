@@ -19,7 +19,6 @@ class Login extends React.Component {
 
   login = (event) => {
     event.preventDefault();
-    //send login request
     axios("/api/login", {
       method: "POST",
       data: {
@@ -29,8 +28,6 @@ class Login extends React.Component {
     })
       .then((response) => {
         console.log(response);
-        //store my token locally
-        //setItem = localstorage method
         localStorage.setItem("token", response.data.token);
         this.props.history.push("/profile");
       })
