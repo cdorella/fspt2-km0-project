@@ -53,7 +53,6 @@ class Restaurant extends React.Component {
               ></img>
             </div>
             <div className="back-container">
-              <div className="right-back"></div>
               <div className="button-container">
                 <Link className="button-restaurant" to="/">
                   <button>Back to search</button>

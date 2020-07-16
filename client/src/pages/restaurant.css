@@ -149,11 +149,9 @@
 }
 
 .back-container {
+  padding: 24px 24px 0;
   display: flex;
-}
-
-.right-back {
-  width: 80%;
+  justify-content: flex-end;
 }
 
 .button-restaurant {
