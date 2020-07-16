@@ -1,6 +1,6 @@
 import React from "react";
 import "./home.css";
-import { Link, NavLink, withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 
 class Home extends React.Component {
   constructor(props) {
