@@ -128,7 +128,6 @@ class UserProfile extends Component {
       restaurants,
       selected,
       specials,
-      restaurantName,
       special_name,
       description,
       login,

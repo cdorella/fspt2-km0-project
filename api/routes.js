@@ -105,15 +105,10 @@ routes.post("/login", (req, res) => {
     `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`
   )
     .then((results) => {
-      //CHECK IF THERE IS SOMEONE WITH THESE CREDENTIALS
       if (results.data.length) {
-        //yes, there is a user
-        //need to generate new token - user ok
-
         var token = jwt.sign({ id: results.data[0].id }, supersecret);
         var id = results.data[0].id;
 
-        //send token to user
         res.send({ message: "user OK, here is your token", token });
       } else {
         res.status(404).send({ message: "User not found" });
@@ -123,24 +118,17 @@ routes.post("/login", (req, res) => {
 });
 
 // GET PROFILE
-//this endpoint is protected
-//how to verify user is correctly logged in when they require private endpoint
 routes.get("/profile", function (req, res, next) {
-  //grab the token
   const token = req.headers["x-access-token"];
   if (!token) {
     res.status(401).send({ message: "Please, log in" });
   } else {
     console.log({ token, supersecret });
-    //I have the token
     jwt.verify(token, supersecret, function (err, decoded) {
       if (err) res.status(401).send({ message: err.message });
       else {
-        //everything's good
-        //send private info to user
         const { id } = decoded;
         res.send({
-          //message: `Here is the private information for user ${id}`,
           id,
         });
       }
