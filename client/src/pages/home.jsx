@@ -1,6 +1,6 @@
 import React from "react";
 import "./home.css";
-import { Link, withRouter } from "react-router-dom";
+import { Link, NavLink, withRouter } from "react-router-dom";
 
 class Home extends React.Component {
   constructor(props) {
@@ -92,59 +92,85 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="header-container">
-          <div className="header-title">
-            <div className="right-header">
-              <img
-                id="logo-home"
-                src="https://i.ibb.co/1XTRLTq/Cream-and-Black-Natural-Makeup-Beauty-Logo.png"
-              ></img>
-            </div>
-            <div className="left-header">
-              <div className="intro-container">
-                <h1 className="intro-title">Hi, what are you looking for?</h1>
-              </div>
+      <div className="wrapper2">
+        <div className="access-container">
+          <div className="left-access"></div>
+          <div className="right-login">
+            <NavLink
+              to="/login"
+              className="nnn"
+              onClick={() => console.log("hola test")}
+            >
+              Admin Access
+            </NavLink>
+          </div>
+        </div>
+        <div className="header-title">
+          <div className="right-header">
+            <img
+              id="logo-home"
+              src="https://i.ibb.co/Y0L6gvP/Cream-and-Black-Natural-Makeup-Beauty-Logo-removebg-preview.png"
+            ></img>
+          </div>
+          <div className="left-header">
+            <div className="intro-container">
+              <h1 className="intro-title">Hi, what are you looking for?</h1>
             </div>
           </div>
+        </div>
 
-          <Link className="button-restaurant" to="/login">
-            <button>Admin Access</button>
-          </Link>
-
-          <div className="form-container">
-            <form className="form-home">
-              <div class="nl-field nl-dd">
-                <label>
+        <div className="contenedor">
+          <form className="nl-form" id="form">
+            <div class="nl-field nl-dd">
+              <label>
+                <h2 className="text-form">
+                  {" "}
                   Hey! I feel like eating some local, seasonal and sustainable
-
                   food. Looking for{" "}
+                </h2>
+              </label>
 
-                </label>
-
-                <select onChange={this.handleCuisine}>
-                  <option> any cuisine style </option>
-                  {this.state.cuisines.map((cuisine) => (
-                    <option id={cuisine.id} key={cuisine.id}>
-                      {cuisine.cuisine_name.toLowerCase()}
-                    </option>
-                  ))}
-                </select>
-                <label> and I would like it to be </label>
-                <select onChange={this.handlePrice}>
-                  <option> any price </option>
-                  <option> budget </option>
-                  <option> mid-range </option>
-                  <option> fine dining </option>
-                </select>
-              </div>
-            </form>
-            <div className="spacer2"></div>
+              <select onChange={this.handleCuisine}>
+                <ul className="nl-field-toggle"> any cuisine style </ul>
+                <option>any cuisine style</option>
+                {this.state.cuisines.map((cuisine) => (
+                  <option
+                    id={cuisine.id}
+                    key={cuisine.id}
+                    className="nl-dd-checked"
+                  >
+                    {cuisine.cuisine_name.toLowerCase()}
+                  </option>
+                ))}
+              </select>
+              <label>
+                {" "}
+                <h2 className="text-form">and I would like it to be </h2>{" "}
+              </label>
+              <select onChange={this.handlePrice}>
+                <option className="nl-field-toggle"> any price </option>
+                <option className="nl-dd-checked"> budget </option>
+                <option className="nl-dd-checked"> mid-range </option>
+                <option className="nl-dd-checked"> fine dining </option>
+              </select>
+            </div>
             <button className="button-form" onClick={this.handleSearchQuery}>
               {" "}
               Find a place!
             </button>
-          </div>
+          </form>
+          <ul class="bg-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
         </div>
         <div className="spacer1"></div>
 
@@ -228,21 +254,14 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
-        <div>
-          {" "}
-          <h1> images </h1>
-          <img src="https://i.ibb.co/myqNZG0/Farmer-amico-2.png"></img>
-          <img src="https://i.ibb.co/Yd2ScyW/Farmer-bro-2.png"></img>
-          <img src="https://i.ibb.co/WWhdDdM/Farmer-rafiki-2.png"></img>
-          <img src="https://i.ibb.co/HYBCF6P/Farmer-pana-1.png"></img>
-          <img src="https://i.ibb.co/R9t3bXH/Farmer-amico-1.png"></img>
-          <img src="https://i.ibb.co/s6qSp1C/Farmer-rafiki-1.png"></img>
-          <img src="https://i.ibb.co/s6f3rLY/Farmer-bro-1.png"></img>
-          <img src="https://i.ibb.co/XpWhG4q/Farmer-pana.png"></img>
-          <img src="https://i.ibb.co/Fw3qG9t/Farmer-amico.png"></img>
-          <img src="https://i.ibb.co/ykgxLP5/Farmer-rafiki.png"></img>
-          <img src="https://i.ibb.co/FYD7SZt/Chef-rafiki.png"></img>
-          <img src="https://i.ibb.co/J330V0Z/Chef-bro.png"></img>
+
+        <div className="quote-container">
+          <h1 className="quote">
+            {" "}
+            We believe Conscious Eating is a big step toward Conscious Living.{" "}
+            <br></br>
+            We are what we eat.{" "}
+          </h1>
         </div>
       </div>
     );
