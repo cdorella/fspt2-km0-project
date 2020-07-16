@@ -71,7 +71,7 @@ In order to have a google maps api key, you will have to sign up for the service
 
 ### Run Your Development Servers
 
-- Run `yarn start` in the project directory to start the servers.
+- Run `yarn dev` in the project directory to start the servers.
 - You can test your client app in `http://localhost:3000`
 - You can test your API in `http://localhost:5000/api`
 
