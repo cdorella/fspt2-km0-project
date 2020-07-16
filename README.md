@@ -16,7 +16,10 @@ The main technologies used to develop this project were:
 * [QRCode](https://yarnpkg.com/package/qrcode#installation):Used to create the QRCode.
 * [Google Maps](https://developers.google.com/maps/documentation/javascript/get-api-key): Used to add Google Maps to our application.
 
+
 ## User Flow Diagram
+
+<a href="https://app.flowmapp.com/share/c7cc46d479c62f24b7da6253fbefbcb2/userflow/90525/">User Flow</a>
 
 ## Database schema
 
@@ -43,20 +46,36 @@ Run `yarn` on root folder to install dependencies related to Express.
 ### Database Prep
 
 - Access the MySQL interface in your terminal by running `mysql -u root -p`
-- Add a `.env` file to the main folder of this repository containing the MySQL authentication information for MySQL user. For example:
+- Add a `.env` file to the main folder of this repository containing the MySQL authentication information for MySQL user.
 
 ```bash
   DB_HOST=localhost
   DB_USER=root
   DB_NAME=km0_project
-  DB_PASS=YOURPASSWORD
+  DB_PASS=
 ```
 
-- Run `yarn migrate` in the main folder of this repository, in a new terminal window. This will create the database and the tables you need for this project in your database.
+- Run `yarn migrate` in the main folder of this repository. This will create the database and the tables you need for this project in your database.
+
+### Add env variables
+
+On the root folder for accessing the api port and for token authentication:
+
+```bash
+  PORT=5000
+  SUPER_SECRET=
+```
+
+On the client folder to access the google maps api:
+
+```bash
+  REACT_APP_GOOGLE_API_KEY=
+```
+In order to have a google maps api key, you will have to sign up for the service through their website: <a href="https://console.cloud.google.com/">Google Cloud Platform</a>
 
 ### Run Your Development Servers
 
-- Run `yarn start` in the project directory to start the servers.
+- Run `yarn dev` in the project directory to start the servers.
 - You can test your client app in `http://localhost:3000`
 - You can test your API in `http://localhost:5000/api`
 
