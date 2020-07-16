@@ -66,6 +66,13 @@
 .restaurant-general {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 1024px) {
+  .restaurant-general {
+    flex-direction: row;
+  }
 }
 
 .restaurant-info {
