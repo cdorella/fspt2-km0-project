@@ -1,4 +1,5 @@
 import React from "react";
+import "./map_container.css";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -66,8 +67,8 @@ class MapContainer extends React.Component {
           onClose={this.onClose}
         >
           <div>
-            <h4>{name}</h4>
-            <h4>{address}</h4>
+            <h4 className="info-window">{name}</h4>
+            <h4 className="info-window">{address}</h4>
           </div>
         </InfoWindow>
       </Map>
