@@ -45,13 +45,13 @@ body {
 .nl-form {
   font-size: 2em;
   padding-left: 24px;
-  padding-right: 24px;  
+  padding-right: 24px;
 }
 
 @media screen and (min-width: 1200px) {
   .nl-form {
     padding-left: 2em;
-    padding-right: 2em;  
+    padding-right: 2em;
   }
 }
 
@@ -545,6 +545,7 @@ input:focus {
 }
 
 .body {
+  padding-right: 230px;
 }
 
 .little-img {
