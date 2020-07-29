@@ -12,7 +12,7 @@ The main technologies used to develop this project were:
 
 - NodeJs and Express for the backend.
 - ReactJs, Javascript ES6, HTML and Css for the frontend.
-- Heroku, for deployment.
+- Heroku for deployment.
 
 * [JsonWebToken](https://jwt.io/introduction/):Used for authentication.
 * [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage):Used as part of JWT authentication.
