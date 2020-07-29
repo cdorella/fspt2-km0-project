@@ -12,7 +12,7 @@ class Results extends React.Component {
     const { restaurants } = this.props.history.location.state;
 
     return (
-      <div className="wraper4">
+      <div className="wrapper4">
         <div className="general-container">
           <div className="title-container">
             {" "}
@@ -73,6 +73,7 @@ class Results extends React.Component {
               <img
                 className="img-results"
                 src="https://i.ibb.co/FYD7SZt/Chef-rafiki.png"
+                alt="chef-cooking"
               ></img>
             </div>{" "}
           </div>

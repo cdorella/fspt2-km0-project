@@ -154,10 +154,11 @@ class UserProfile extends Component {
           </div>
         </div>
         <div className="restaurant-info1">
-          <div className="resturant-right">
+          <div className="restaurant-right">
             <img
               src="https://i.ibb.co/fGSBRG8/Chef-bro-1.png"
               className="img-admin"
+              alt="chef-cooking"
             ></img>
           </div>
           <div className="restaurant-left">

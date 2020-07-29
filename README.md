@@ -2,12 +2,17 @@
 
 NearEAT was inspired by the idea of the KM0 SlowFood Community and by the importance of supporting local businesses as well as being mindful of the food we eat and where it comes from. Km0 is a concept which involves restaurants that only cook their dishes with seasonal ingredients sourced locally, they support ecological agriculture and the use of fish captured sustainably. The main idea of this project is to have all of these restaurants in one web application which will give these businesses more visibility and will encourage people to be more conscious and sustainable when eating out.
 
+Check out the deployed app on Heroku: [nearEAT](https://km0project.herokuapp.com/)
+
+<img src="images/home%20page.JPG" >
+
 ## Technologies
 
 The main technologies used to develop this project were:
 
 - NodeJs and Express for the backend.
 - ReactJs, Javascript ES6, HTML and Css for the frontend.
+- Heroku, for deployment.
 
 * [JsonWebToken](https://jwt.io/introduction/):Used for authentication.
 * [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage):Used as part of JWT authentication.
@@ -15,7 +20,6 @@ The main technologies used to develop this project were:
 * [CoDrops](https://tympanus.net/codrops/2013/05/21/natural-language-form-with-custom-input-elements/):Used to style the form in landing page.
 * [QRCode](https://yarnpkg.com/package/qrcode#installation):Used to create the QRCode.
 * [Google Maps](https://developers.google.com/maps/documentation/javascript/get-api-key): Used to add Google Maps to our application.
-
 
 ## User Flow Diagram
 
@@ -71,6 +75,7 @@ On the client folder to access the google maps api:
 ```bash
   REACT_APP_GOOGLE_API_KEY=
 ```
+
 In order to have a google maps api key, you will have to sign up for the service through their website: <a href="https://console.cloud.google.com/">Google Cloud Platform</a>
 
 ### Run Your Development Servers

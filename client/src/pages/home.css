@@ -155,9 +155,6 @@ body {
   color: transparent;
 }
 
-.nl-form {
-}
-
 .nl-field-go:before {
   content: "e001";
   font-size: 75%;
@@ -229,7 +226,7 @@ input:focus::-ms-input-placeholder {
   background: #58a199;
 }
 
-.contenedor {
+.container-form {
   background-color: #96bb7c;
   width: 80%;
   padding: 2%;
@@ -256,11 +253,7 @@ input:focus::-ms-input-placeholder {
   padding-left: 8%;
 }
 
-.quote-container {
-}
-
 .quote {
-  padding-left: 10%;
   padding-right: 10%;
   padding-top: 5%;
   font-style: italic;
@@ -444,9 +437,6 @@ form button:hover {
   background-color: #96bb7c;
 }
 
-.header-container {
-}
-
 .header-title {
   display: flex;
 }
@@ -515,7 +505,7 @@ form button:hover {
   justify-content: center;
 }
 
-.little-contenet {
+.little-content {
   padding: 4%;
 }
 

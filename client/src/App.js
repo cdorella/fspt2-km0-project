@@ -3,7 +3,7 @@ import "./App.css";
 import Home from "./pages/home.jsx";
 import Restaurant from "./pages/restaurant.jsx";
 import Login from "./components/login.jsx";
-import UserProfile from "./components/userProfile.jsx";
+import UserProfile from "./components/user_profile.jsx";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Results from "./pages/results.jsx";

@@ -50,6 +50,7 @@ class Restaurant extends React.Component {
               <img
                 src="https://i.ibb.co/QHcY6zv/Macaron-Photo-Food-Facebook-Cover.png"
                 className="restaurant-banner"
+                alt="macaroon-basket"
               ></img>
             </div>
             <div className="back-container">

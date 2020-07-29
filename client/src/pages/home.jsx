@@ -106,6 +106,7 @@ class Home extends React.Component {
             <img
               id="logo-home"
               src="https://i.ibb.co/Y0L6gvP/Cream-and-Black-Natural-Makeup-Beauty-Logo-removebg-preview.png"
+              alt="nearEat-logo"
             ></img>
           </div>
           <div className="left-header">
@@ -115,7 +116,7 @@ class Home extends React.Component {
           </div>
         </div>
 
-        <div className="contenedor">
+        <div className="container-form">
           <form className="nl-form" id="form">
             <div class="nl-field nl-dd">
               <label>
@@ -187,9 +188,10 @@ class Home extends React.Component {
                   <img
                     className="img-body"
                     src="https://i.ibb.co/7N4rYP4/Farmer-bro.png"
+                    alt="farmer-with-chicken"
                   ></img>
                 </div>
-                <div className="little-contenet">
+                <div className="little-content">
                   <div className="space-home"></div>
                   <div className="space-home2"></div>
                   <p>
@@ -208,9 +210,10 @@ class Home extends React.Component {
                   <img
                     className="img-body"
                     src="https://i.ibb.co/r38KzqC/Chef-pana.png"
+                    alt="chef-cooking"
                   ></img>
                 </div>
-                <div className="little-contenet">
+                <div className="little-content">
                   <div className="space-home"></div>
                   <div className="space-home2"></div>
                   <p>
@@ -234,9 +237,10 @@ class Home extends React.Component {
                   <img
                     className="img-body"
                     src="https://i.ibb.co/87CsvfC/Eating-healthy-food-pana.png"
+                    alt="girl-eating"
                   ></img>
                 </div>
-                <div className="little-contenet">
+                <div className="little-content">
                   <div className="space-home"></div>
                   <div className="space-home2"></div>
                   <p>

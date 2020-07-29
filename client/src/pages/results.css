@@ -4,7 +4,7 @@
   padding-left: 5%;
 }
 
-.wraper4 {
+.wrapper4 {
   background: #96bb7c;
   background: -webkit-gradient(
     linear,
@@ -51,14 +51,14 @@
   width: 10%;
 }
 
-.restaurnat-name-container {
+.restaurant-name-container {
   display: flex;
   justify-content: flex;
 }
 
 .restaurant-up {
   display: flex;
-  width: 100%;
+  width: 200%;
 }
 .restaurant-img {
   width: 20%;
@@ -68,9 +68,7 @@
   border-bottom-left-radius: 30%;
 }
 .restaurant-info {
-  padding-top: 5%;
-  padding-left: 5%;
-
+  padding: 3%;
   background-color: #eebb4d;
   border-top-right-radius: 25%;
   border-bottom-right-radius: 25%;
